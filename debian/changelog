@@ -1,3 +1,16 @@
+bubblewrap (0.2.1-1ubuntu0.1) bionic-security; urgency=medium
+
+  [ Iain Lane ]
+  * Don't install setuid on Ubuntu & derivatives since Ubuntu's
+    kernel enables unprivileged user namespaces (LP: #1795668, LP: #1709164)
+  * debian/tests/basic: We're not setuid - in this case we have to use a new
+    user namespace. Not all the GIDs from the parent namespace are mapped
+    through, and so testing that `id` is identical inside and out of the
+    bubblewrap is not going to work. Let's make sure that the euid and egid
+    are the same.
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Tue, 02 Oct 2018 11:03:48 -0400
+
 bubblewrap (0.2.1-1) unstable; urgency=medium
 
   * New upstream release
